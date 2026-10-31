@@ -1,0 +1,30 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# next.js
+.next/
+out/
+next-env.d.ts
+
+# generated (rebuilt by `pnpm theme:generate`)
+src/styles/theme.generated.css
+
+# test output
+coverage/
+test-results/
+playwright-report/
+
+# env files (never commit real values)
+.env
+.env.*
+!.env.example
+
+# local-only notes (demo credentials sheet lives here, never pushed)
+*.local.md
+
+# misc
+.DS_Store
+*.log
+*.tsbuildinfo
+.vercel

@@ -1,0 +1,196 @@
+@import 'tailwindcss';
+@import './theme.generated.css';
+
+/*
+ * No color values live here. Every color comes from src/theme/themes.ts through the
+ * generated file (variables + the Tailwind mapping). The generated file also removes
+ * the default Tailwind palette, so only semantic tokens (bg-surface-card,
+ * text-status-danger-text, ...) can be used.
+ */
+@theme inline {
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
+}
+
+@layer base {
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    background-color: var(--c-surface-canvas);
+    color: var(--c-fg-primary);
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--c-line-focus);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Login photo scrim: stronger at the top (title area) and left, soft at the bottom. */
+  .login-scrim {
+    background:
+      linear-gradient(
+        180deg,
+        var(--c-scrim-solid) 0%,
+        var(--c-scrim-solid) 16%,
+        var(--c-scrim-heavy) 34%,
+        var(--c-scrim-medium) 56%,
+        var(--c-scrim-clear) 72%
+      ),
+      linear-gradient(
+        90deg,
+        var(--c-scrim-side-strong) 0%,
+        var(--c-scrim-side-soft) 50%,
+        var(--c-scrim-clear) 100%
+      ),
+      linear-gradient(0deg, var(--c-scrim-side-strong) 0%, var(--c-scrim-clear) 30%);
+  }
+
+  /* Scrolls normally but never shows a scrollbar (sidebar navigation). */
+  .scrollbar-hidden {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fade-in 0.9s 0.2s forwards;
+}
+
+.fade-in-slow {
+  opacity: 0;
+  animation: fade-in 1.6s 0.2s forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in,
+  .fade-in-slow {
+    opacity: 1;
+    animation: none;
+  }
+}
+
+/* ---------- Dashboard grid (DESIGN.md 4.3 and 4.4) ---------- */
+@layer components {
+  .dash-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .span-c3 {
+    grid-column: span 3;
+  }
+  .span-c4 {
+    grid-column: span 4;
+  }
+  .span-c6 {
+    grid-column: span 6;
+  }
+  .span-c8 {
+    grid-column: span 8;
+  }
+  .span-c12 {
+    grid-column: span 12;
+  }
+  .span-k3 {
+    grid-column: span 4;
+  }
+  .span-k4 {
+    grid-column: span 3;
+  }
+  .span-k6 {
+    grid-column: span 6;
+  }
+
+  .kpi-vis {
+    position: absolute;
+    right: 14px;
+    bottom: 12px;
+    width: clamp(64px, 26%, 110px);
+    height: 46px;
+  }
+
+  @media (max-width: 1700px) {
+    .kpi {
+      flex-wrap: wrap;
+      min-height: 0;
+      gap: 10px 12px;
+    }
+    .kpi-vis {
+      position: static;
+      width: 100%;
+      height: 38px;
+      flex-basis: 100%;
+    }
+  }
+
+  @media (max-width: 1560px) {
+    .span-c4 {
+      grid-column: span 6;
+    }
+    .span-wide {
+      grid-column: span 12;
+    }
+  }
+
+  @media (max-width: 1360px) {
+    .span-c3 {
+      grid-column: span 6;
+    }
+    .span-c4,
+    .span-c6,
+    .span-c8 {
+      grid-column: span 12;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .span-k3,
+    .span-k4 {
+      grid-column: span 6;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .span-c3 {
+      grid-column: span 12;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .span-k3,
+    .span-k4,
+    .span-k6 {
+      grid-column: span 12;
+    }
+  }
+}
